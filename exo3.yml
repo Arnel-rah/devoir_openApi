@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: Exemple simple API Task
+  version: 1.0.0
+
+paths:
+  /tasks:
+    get:
+      summary: Retourne une liste de Tasks
+      responses:
+        "200":
+          description: Liste de Tasks trouvées
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Apprendre OpenAPI"
+                    completed:
+                      type: boolean
+                      example: false
+        "400":
+          description: Erreur - tâches non trouvées
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Aucune Tasks trouvée"
