@@ -36,3 +36,51 @@ paths:
                   error:
                     type: string
                     example: "Aucune Tasks trouvée"
+    post:
+      summary: Crée une liste de nouvelles tâches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                  - title
+                properties:
+                  title:
+                    type: string
+                    example: "Nouvelle tâche"
+                  completed:
+                    type: boolean
+                    example: false
+      responses:
+        "201":
+          description: Liste de tâches créée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Nouvelle tâche"
+                    completed:
+                      type: boolean
+                      example: false
+        "400":
+          description: Erreur - données de la requête invalides
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Données de la requête invalides"
