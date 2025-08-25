@@ -84,3 +84,120 @@ paths:
                   error:
                     type: string
                     example: "Données de la requête invalides"
+   /tasks/{id}:
+    get:
+      summary: Retourne une tâche par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Tâche trouvée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: "Apprendre OpenAPI"
+                  completed:
+                    type: boolean
+                    example: false
+        "404":
+          description: Task not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Task not found"
+
+    delete:
+      summary: Supprime une tâche par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Tâche supprimée
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: "Apprendre OpenAPI"
+                  completed:
+                    type: boolean
+                    example: false
+        "404":
+          description: Task not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Task not found"
+  /tasks:
+    delete:
+      summary: Supprime une liste de tâches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+              example:
+                ids: [1, 2, 3]
+      responses:
+        "200":
+          description: Liste de tâches supprimées
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Ancienne tâche"
+                    completed:
+                      type: boolean
+                      example: true
+        "400":
+          description: Erreur - liste d'IDs invalide
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Liste d'IDs invalide"
